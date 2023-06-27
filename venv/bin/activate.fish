@@ -29,7 +29,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/bfaris96/Desktop/Turing/sprnt1_proj_die/venv"
+set -gx VIRTUAL_ENV "/Users/bfaris96/Desktop/turing-proj/die_project/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

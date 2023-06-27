@@ -1,4 +1,4 @@
-#!/Users/bfaris96/Desktop/Turing/sprnt1_proj_die/venv/bin/python3
+#!/Users/bfaris96/Desktop/turing-proj/die_project/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

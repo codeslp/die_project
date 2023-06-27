@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/bfaris96/Desktop/Turing/sprnt1_proj_die/venv"
+VIRTUAL_ENV="/Users/bfaris96/Desktop/turing-proj/die_project/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
