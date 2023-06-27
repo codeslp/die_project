@@ -23,9 +23,9 @@ class Dice:
             number (int): The number of dice in the set.
         """
         if sides < 1 or sides > 100:
-            return ValueError("Number of sides must be greater than zero and less than 101.")
+            raise ValueError("Number of sides must be greater than zero and less than 101.")
         elif number < 1 or number > 5:
-            return ValueError("Minimum of 1 die and maximum of 5 dice are allowed.")
+            raise ValueError("Minimum of 1 die and maximum of 5 dice are allowed.")
         else:
             self._dice = [Die(sides, number) for _ in range(number)]
             self.roll_history = collections.deque(maxlen=100)
