@@ -36,18 +36,6 @@ class Dice:
         """
         return len(self._dice)
 
-    def __getitem__(self, position):
-        """
-        Returns the die at the specified position in the set.
-
-        Args:
-            position (int): The position of the die to retrieve.
-
-        Returns:
-            Die: The die at the specified position.
-        """
-        return self._dice[position]
-
     def roll(self):
         """
         Rolls all the dice in the set and returns the result.
