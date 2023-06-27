@@ -1,6 +1,6 @@
 # Dice Rolling Web API
 
-This Python-based project simulates the rolling of dice. The project leverages the Flask framework to create a web API, which allows you to roll a dice and also to retrieve the history of dice rolls. The application supports a range of die configurations, enabling users to specify the number of sides on each die as well as the number of dice to be rolled.
+This Python-based project simulates the rolling of dice. The project leverages the Flask framework to create a web API, which allows you to roll dice and also to retrieve the history of dice rolls. The application supports a range of die configurations, enabling users to specify the number of sides on each die as well as the number of dice to be rolled.
 
 ## Features
 
