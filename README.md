@@ -10,13 +10,11 @@ This Python-based project simulates the rolling of dice. The project leverages t
 
 ## Special Python Features
 
-The application makes use of several special (dunder) methods in Python, also known as magic methods. 
+The application makes use of two special (dunder) methods in Python, also known as magic methods. 
 
 - `__init__`: This is the class constructor method. It's called when a new object of the class is created and allows the class to set up its attributes.
 
 - `__len__`: This method allows a class to define its "length". For our Dice class, the length is the number of dice in the set.
-
-- `__getitem__`: This method allows a class to support indexing. In the Dice class, this allows us to retrieve a die at a specified position in the set.
 
 ## API Endpoints
 
