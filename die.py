@@ -54,4 +54,4 @@ class Dice:
         Returns:
             collections.deque: A deque containing the most recent rolls made with the dice.
         """
-        return self.roll_history
+        return list(self.roll_history)

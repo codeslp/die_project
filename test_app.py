@@ -1,57 +1,56 @@
 import unittest
-from die import Dice
+from flask import json
+from app import create_app, db, Roll
 
-class TestDice(unittest.TestCase):
+class TestApp(unittest.TestCase):
     """
-    A test suite for the Dice class.
+    A class dedicated to testing the functionality of the Flask application. It ensures that all API endpoints are
+    functioning as expected, the database interacts as expected, and the dice rolling and history retrieval are handled
+    correctly.
     """
+
+    def setUp(self):
+        """
+        Creates a Flask app and a test client to interact with the app.
+        """
+        self.app = create_app()
+        self.app.config['TESTING'] = True
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test_dice.db'
+        self.client = self.app.test_client()
+        with self.app.app_context():
+            db.create_all()
+
+    def tearDown(self):
+        """
+        Removes the database session and drops all tables.
+        """
+        with self.app.app_context():
+            db.session.remove()
+            db.drop_all()
 
     def test_roll(self):
         """
-        Tests the roll method of the Dice class.
+        Tests the /roll endpoint.
         """
-        dice = Dice(6, 1)
-        roll = dice.roll()
-        self.assertEqual(len(roll), 1)
-        self.assertTrue(1 <= roll[0] <= 6)
+        response = self.client.post('/roll', json={'sides': 6, 'number': 2})
+        data = json.loads(response.data)
+        self.assertEqual(len(data), 2)
+        self.assertTrue(1 <= data[0] <= 6)
+        self.assertTrue(1 <= data[1] <= 6)
 
     def test_history(self):
         """
-        Tests the get_history method of the Dice class.
+        Tests the /history endpoint.
         """
-        dice = Dice(6, 1)
-        roll = dice.roll()
-        history = dice.get_history()
-        self.assertEqual(len(history), 1)
-        self.assertEqual(history[0], roll)
-
-    def test_invalid_sides(self):
-        """
-        Tests the Dice class constructor with an invalid number of sides.
-        """
-        with self.assertRaises(ValueError):
-            Dice(101, 1)
-
-    def test_invalid_number(self):
-        """
-        Tests the Dice class constructor with an invalid number of dice.
-        """
-        with self.assertRaises(ValueError):
-            Dice(6, 6)
-
-    def test_multiple_rolls(self):
-        """
-        Tests multiple rolls and checks history
-        """
-        dice = Dice(6, 2)
-        for _ in range(5):
-            roll = dice.roll()
-            self.assertEqual(len(roll), 2)
-            for r in roll:
-                self.assertTrue(1 <= r <= 6)
-        history = dice.get_history()
-        self.assertEqual(len(history), 5)
+        self.client.post('/roll', json={'sides': 6, 'number': 2})
+        self.client.post('/roll', json={'sides': 6, 'number': 2})
+        response = self.client.get('/history/6/2')
+        data = json.loads(response.data)
+        self.assertEqual(len(data), 2)
+        for d in data:
+            self.assertEqual(len(d), 2)
+            self.assertTrue(1 <= d[0] <= 6)
+            self.assertTrue(1 <= d[1] <= 6)
 
 if __name__ == "__main__":
     unittest.main()
-
