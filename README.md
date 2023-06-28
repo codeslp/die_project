@@ -1,24 +1,70 @@
-# Dice Rolling Web API
+# Dice Roller API
 
-This Python-based project simulates the rolling of dice. The project leverages the Flask framework to create a web API, which allows you to roll dice and also to retrieve the history of dice rolls. The application supports a range of die configurations, enabling users to specify the number of sides on each die as well as the number of dice to be rolled.
+This repository contains a simple Flask application for rolling dice and recording the history of those rolls. The Dice Roller API is a web service with endpoints for both rolling dice and retrieving the history of dice rolls. 
 
-## Features
+## Components
 
-- Create a die with a configurable number of sides and dice in the set.
-- Roll the dice and get a result.
-- Fetch the most recent dice rolls.
+The `Dice` class is a Python object that simulates a set of dice. It utilizes Python's special methods such as `__init__` for initializing dice with specific sides and numbers, and `__len__` for returning the number of dice in the set. The `Dice` class also provides methods to roll the dice and get the history of rolls.
 
-## Special Python Features
+The Flask application serves as the interface to interact with the `Dice` class via web endpoints. 
 
-The application makes use of two special (dunder) methods in Python, also known as magic methods. 
+One of the core components of this application is the use of SQLAlchemy, a Python SQL toolkit and Object-Relational Mapping (ORM) library. SQLAlchemy provides the ability to "talk" to our SQLite database by converting Python classes to tables in our database and converting function calls to SQL statements. This allows us to persist the state of our application and save dice rolls across sessions.
 
-- `__init__`: This is the class constructor method. It's called when a new object of the class is created and allows the class to set up its attributes.
+The application uses a simple SQLite database to store the roll results. SQLite is a light, disk-based database, which requires zero configuration - perfect for development and testing. 
 
-- `__len__`: This method allows a class to define its "length". For our Dice class, the length is the number of dice in the set.
+The `Roll` class defined in the code maps to a table in our database where each roll's results are stored. SQLAlchemy's ORM makes it easy for our application to insert new rolls, query roll history, and manage our database.
 
-## API Endpoints
+## How to Install and Run
 
-- `POST /roll`: Roll the dice. This endpoint accepts a JSON object specifying the number of sides and number of dice. For example:
+1. Clone the repository:
+
+```
+git clone <repo_url>
+```
+
+2. Navigate into the cloned repository:
+
+```
+cd <repo_name>
+```
+
+3. Install a virtual environment:
+
+```
+python -m venv venv
+```
+
+4. Activate the virtual environment:
+
+On Windows:
+
+```
+.\venv\Scripts\activate
+```
+
+On Unix or MacOS:
+
+```
+source venv/bin/activate
+```
+
+5. Install the required packages:
+
+```
+pip install -r requirements.txt
+```
+
+6. Run the Flask application:
+
+```
+flask run
+```
+
+The application will start running at `localhost:5000`.
+
+## How to Use
+
+To roll the dice, send a POST request to the `/roll` endpoint with a JSON object containing the number of sides and dice. For example:
 
 ```json
 {
@@ -27,13 +73,14 @@ The application makes use of two special (dunder) methods in Python, also known 
 }
 ```
 
-- `GET /history`: Get the most recent dice rolls. The endpoint requires a JSON object specifying the sides and number of dice, as in the `/roll` endpoint.
+To retrieve the history of rolls, send a GET request to the `/history/<sides>/<number>` endpoint, replacing `<sides>` and `<number>` with the number of sides on the dice and the number of dice.
 
-## Testing
+## How to Test
 
-Unit tests have been written for the Dice class and can be run using the Python's built-in `unittest` module. 
+1. Run the test suite:
 
-To run the tests, navigate to the root directory of the project and run: 
+```
+python -m unittest test_die.py
+```
 
-```sh
-python -m unittest test_die
+This will run a series of unit tests on the `Dice` class to ensure its functionality.
