@@ -84,3 +84,6 @@ python -m unittest test_die.py
 ```
 
 This will run a series of unit tests on the `Dice` class to ensure its functionality.
+
+## Also here is a postman collection to test it:
+https://www.postman.com/aviation-explorer-99011090/workspace/project-testing/request/26666197-0c0e6d82-e697-4bad-a0ce-707ff243cd0c
