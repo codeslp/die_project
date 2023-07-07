@@ -1,7 +1,7 @@
-import collections
+from collections import deque, namedtuple
 from random import choice
 
-Die = collections.namedtuple('Die', ['sides', 'number'])
+Die = namedtuple('Die', ['sides', 'number'])
 
 
 class Dice:
@@ -28,7 +28,7 @@ class Dice:
             raise ValueError("Minimum of 1 die and maximum of 5 dice are allowed.")
         else:
             self._dice = [Die(sides, number) for _ in range(number)]
-            self.roll_history = collections.deque(maxlen=100)
+            self.roll_history = deque(maxlen=100)
 
     def __len__(self):
         """
